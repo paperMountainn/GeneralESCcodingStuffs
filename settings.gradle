@@ -1,0 +1,6 @@
+include ':SumSquaredErrorTriangulation'
+include ':CodingStandardWeek6'
+include ':selenium-ESC-cohort'
+include ':GeneralCoding'
+include ':app'
+rootProject.name = "GeneralCodingPurposes"
