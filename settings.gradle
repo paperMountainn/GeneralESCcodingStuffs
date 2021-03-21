@@ -1,3 +1,4 @@
+include ':CSE-JavaSync-SampleCode'
 include ':SumSquaredErrorTriangulation'
 include ':CodingStandardWeek6'
 include ':selenium-ESC-cohort'

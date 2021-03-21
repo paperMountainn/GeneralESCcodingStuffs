@@ -3,12 +3,13 @@ package com.example.sumsquarederrortriangulation;
 /**
  *wifiAP class can create wifiAP objects, in which we use to store the wifiAPs
  */
-public class oneAPEntry {
+public class OneAPScan {
     private String wifiApName;
     private String macAddress;
-    private String signalStrength;
+    private double signalStrength;
+    private String location;
 
-    public oneAPEntry(String wifiApName, String macAddress, String signalStrength) {
+    public OneAPScan(String wifiApName, String macAddress, double signalStrength) {
         this.wifiApName = wifiApName;
         this.macAddress = macAddress;
         this.signalStrength = signalStrength;
@@ -30,11 +31,11 @@ public class oneAPEntry {
         this.macAddress = macAddress;
     }
 
-    public String getSignalStrength() {
+    public double getSignalStrength() {
         return signalStrength;
     }
 
-    public void setSignalStrength(String signalStrength) {
+    public void setSignalStrength(double signalStrength) {
         this.signalStrength = signalStrength;
     }
 }

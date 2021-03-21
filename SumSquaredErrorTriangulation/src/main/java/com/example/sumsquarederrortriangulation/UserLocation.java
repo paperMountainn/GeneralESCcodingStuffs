@@ -1,5 +1,5 @@
 package com.example.sumsquarederrortriangulation;
 
-public class sumSquaredErrorAlgorithm {
+public class UserLocation {
 
 }
