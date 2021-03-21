@@ -1,3 +1,4 @@
+include ':ESC-Week8-Advanced-SoftwareTesting'
 include ':CSE-JavaSync-SampleCode'
 include ':SumSquaredErrorTriangulation'
 include ':CodingStandardWeek6'
