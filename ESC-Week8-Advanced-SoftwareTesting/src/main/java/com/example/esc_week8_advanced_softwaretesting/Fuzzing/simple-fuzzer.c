@@ -9,6 +9,8 @@ int main() {
 
 	// strings of any length between 0 and 1024
 	srand(time(NULL));
+
+	// generating random number
 	int string_length = rand() % 1024;
 	//printf("input length = %d\n", string_length);
 
@@ -16,9 +18,10 @@ int main() {
 	input = (char *) malloc ((string_length+1) * sizeof(char));
 
 	//generate a random character at each location of the string
+	// for each position in the buffer, generate a random number between 0 and 1
 	for (index = 0; index < string_length; index++) {
 		double between_0_and_1 = (double)rand() / (double)RAND_MAX;
-		//generate a character between ASCII 32 and 128
+		//generate a character between ASCII 32 and 128, ensure that it generates a number, not a symbol
 		input[index] = (int)(between_0_and_1 * 96 + 32);
 	}
 	input[string_length] = '\0';
