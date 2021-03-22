@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <string.h>
 
+
+// mutation operators: flip and trim
 // Flipping a random bit of a random character in the input string
 void flip(char* input) {
 	int flip_position, flip_bit;
