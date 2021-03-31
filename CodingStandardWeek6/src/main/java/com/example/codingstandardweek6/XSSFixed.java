@@ -1,3 +1,5 @@
+package com.example.codingstandardweek6;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.text.Normalizer;

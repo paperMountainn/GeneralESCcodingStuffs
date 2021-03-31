@@ -1,50 +1,46 @@
 package seleniumDemoPrograms;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.Random;
 
 public class FindAndClickAllLink {
-		
-	public static void main(String[] args) throws InterruptedException {		
-//		System.setProperty("webdriver.gecko.driver","/Users/sudiptac/sudiptac/teaching/SUTD/50.003@2020/Test/newnewGecko/geckodriver");
-//		WebDriver driver = new FirefoxDriver();
-//
-//		System.setProperty("webdriver.chrome.driver","/Users/sudiptac/sudiptac/teaching/SUTD/50.003@2018/Test/chromedriver");
+
+
+	public static void main(String[] args) throws InterruptedException {
 		System.setProperty("webdriver.chrome.driver","D:/Downloads D Drive/chromedriver_win32/chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 
-		driver.get("https://sudiptac.bitbucket.io");
-		//driver.get("https://istd.sutd.edu.sg/");
-		//driver.get("https://www.google.com.sg");
-		
-		// get all the links
+		/*driver.get("https://sudiptac.bitbucket.io");*/
+		driver.get("https://istd.sutd.edu.sg/");
+//		driver.get("https://www.google.com.sg");
+
+		// get all the links by the tag name <a
+		// a = anchor elements, so we store all the anchor elements in a list
 		java.util.List<WebElement> links = driver.findElements(By.tagName("a"));
 		System.out.println(links.size());
-				
+
 		// print all the links
 		for (int i = 0; i < links.size(); i=i+1) {
 			System.out.println(i + " " + links.get(i).getText());
 			System.out.println(i + " " + links.get(i).getAttribute("href"));
 		}
-		
+
 		// maximize the browser window
 		driver.manage().window().maximize();
-		
+
+		Random random = new Random();
+		int max = links.size()-1;
+		int min = 0;
+
+
 		// click all links in a web page
-		for(int i = 0; i < links.size(); i++)
+		while(true)
 		{
-			System.out.println("*** Navigating to" + " " + links.get(i).getAttribute("href"));
-			//if (links.get(i).getAttribute("href") == null || 
-			//		links.get(i).getAttribute("href").equals("https://sudiptac.bitbucket.io"))
-			if (links.get(i).getAttribute("href") == null)
-				continue;
+
 			boolean staleElementLoaded = true;
 
 			//the loop checks whether the elements is properly loaded
@@ -52,21 +48,29 @@ public class FindAndClickAllLink {
 			// and then reload the page again
 			// if something went wrong, do the catch block
 			// repeat while loop until the webpage is properly loaded
+
+			// statelElementLoaded: sometimes page does not load properly, throws this
+			// catching this exception, make it true first, if its false it means that it loaded proper.y
 			while(staleElementLoaded) {
 				try {
 					//navigate to the link
-					driver.navigate().to(links.get(i).getAttribute("href"));
+					int randomIndex = random.nextInt(max - min + 1) + min;
+					System.out.println("the random index of the link is currently " + randomIndex);
+					driver.navigate().to(links.get(randomIndex).getAttribute("href"));
 
 					Thread.sleep(3000);
 
 					//click the back button in browser
 					driver.navigate().back();
 
-					// this line is really important, if you don't have, will have exceptions
+					Thread.sleep(3000);
 
+					// this line is really important, if you don't have, will have exceptions
+					// load all elements again
 					links = driver.findElements(By.tagName("a"));
 
-					System.out.println("*** Navigated to" + " " + links.get(i).getAttribute("href"));
+					// debug
+					System.out.println("*** Navigated to" + " " + links.get(randomIndex).getAttribute("href"));
 
 					staleElementLoaded = false;
 				} catch (StaleElementReferenceException e) {
@@ -77,5 +81,3 @@ public class FindAndClickAllLink {
 	}
 }
 
-// if intention: just to check links work properly -> you do not have to open up, just link up with the web 
-// use BrokenLinkFinder file

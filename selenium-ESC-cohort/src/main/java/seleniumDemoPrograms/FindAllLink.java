@@ -8,9 +8,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class FindAllLink {
 	
 	public static void main(String[] args) {		
-		System.setProperty("webdriver.gecko.driver","/Users/sudiptac/sudiptac/teaching/SUTD/50.003@2020/Test/newnewGecko/geckodriver");
-		WebDriver driver = new FirefoxDriver();
-		
+//		System.setProperty("webdriver.gecko.driver","/Users/sudiptac/sudiptac/teaching/SUTD/50.003@2020/Test/newnewGecko/geckodriver");
+//		WebDriver driver = new FirefoxDriver();
+
+		System.setProperty("webdriver.chrome.driver","D:/Downloads D Drive/chromedriver_win32/chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+
 		driver.get("https://sudiptac.bitbucket.io/");
 		
 		// get all the links

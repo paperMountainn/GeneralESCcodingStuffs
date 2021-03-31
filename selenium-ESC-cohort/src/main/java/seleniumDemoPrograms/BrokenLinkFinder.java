@@ -16,6 +16,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BrokenLinkFinder {
+
+
+	/**
+	 * Try to establish HTTP connection with the url object (link)
+	 * @param hyperLink
+	 * @throws Exception
+	 */
 	
 	// this is a function which checks whether a given hyper link in a web page is broken
 	public static void brokenLinkChecker(URL hyperLink) throws Exception {
@@ -40,15 +47,20 @@ public class BrokenLinkFinder {
 
 			// print!
 		    System.out.println("*** The link " + "returned " + code);
-		} catch(Exception e) {
+		}
+		// in case link requires a certification...
+		catch(Exception e) {
 			System.out.println("*** Throws exception " + e.toString());
 		    System.out.println("*** The link " + "is not HTTP or requires certificate validation, message = " + acknowledge);
 		}  				
 	}
 		
 	public static void main(String[] args) throws Exception {		
-		System.setProperty("webdriver.gecko.driver","/Users/sudiptac/sudiptac/teaching/SUTD/50.003@2019/Test/newGecko/geckodriver");
-		WebDriver driver = new FirefoxDriver();
+//		System.setProperty("webdriver.gecko.driver","/Users/sudiptac/sudiptac/teaching/SUTD/50.003@2019/Test/newGecko/geckodriver");
+//		WebDriver driver = new FirefoxDriver();
+
+		System.setProperty("webdriver.chrome.driver","D:/Downloads D Drive/chromedriver_win32/chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
 
 		//System.setProperty("webdriver.chrome.driver","/Users/sudiptac/sudiptac/teaching/SUTD/50.003@2018/Test/chromedriver");
 		//WebDriver driver = new ChromeDriver();
