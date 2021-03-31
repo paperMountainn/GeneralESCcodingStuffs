@@ -15,4 +15,5 @@ dependencies {
     implementation files('libs/guava-25.0-jre.jar')
     implementation files('libs/okhttp-3.11.0.jar')
     implementation files('libs/okio-1.14.0.jar')
+    implementation 'junit:junit:4.12'
 }
