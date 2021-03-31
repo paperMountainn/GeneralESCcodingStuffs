@@ -1,4 +1,4 @@
-package com.example.codingstandardweek6;
+package codeSmells;
 
 import java.util.EmptyStackException;
 import java.util.Vector;
