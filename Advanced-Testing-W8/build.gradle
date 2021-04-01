@@ -6,3 +6,6 @@ java {
     sourceCompatibility = JavaVersion.VERSION_1_7
     targetCompatibility = JavaVersion.VERSION_1_7
 }
+dependencies {
+    implementation files('libs/evosuite-1.0.6.jar')
+}
