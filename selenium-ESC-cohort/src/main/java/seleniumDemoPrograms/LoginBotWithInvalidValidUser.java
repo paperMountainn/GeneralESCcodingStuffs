@@ -9,41 +9,30 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
+import java.sql.Driver;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Pset 3 Qn 2
+ * Pset 3 Qn 2: This is wrong, becuase you are sending a list of usernames that you knew beforehand that is wrong
  * send N invalid usernames to Statcounter login form
  * then login with username and password
  */
 public class LoginBotWithInvalidValidUser {
 
-
-    // correct username and password
-    static String myUserName = "escistd50.003";
-    static String myPassword = "SUTD@Singapore";
-
-    // array of invalid usernames
-    static String[] innovativeUsernames = {"escistd50.005", "escepd50.003", "profSud"};
-
-
-
-
-
-
-    public static void main(String[] args) throws InterruptedException {
-
-        System.setProperty("webdriver.chrome.driver","D:/Downloads D Drive/chromedriver_win32/chromedriver.exe");
+    public static WebDriver setWebDriver(String driverName, String path){
+        // "webdriver.chrome.driver","D:/Downloads D Drive/chromedriver_win32/chromedriver.exe"
+        System.setProperty(driverName, path);
         WebDriver driver = new ChromeDriver();
+        return driver;
+    }
 
-        driver.get("https://statcounter.com/login/");
+    public static void sendNameAndPassword(String[] usernames, String correctPassword, WebDriver driver) throws InterruptedException {
 
-
-
-
-        for (String innovativeUsername : innovativeUsernames) {
+        for (String innovativeUsername : usernames) {
 
             // get the user name field of the account page
             WebElement username = driver.findElement(By.id("username"));
@@ -53,63 +42,51 @@ public class LoginBotWithInvalidValidUser {
 
             // locate the "Next" button in the account page
             WebElement password = driver.findElement(By.id("password"));
-            password.sendKeys(myPassword);
+            password.sendKeys(correctPassword);
 
             // login
             WebElement nextButton = driver.findElement(By.className("submit"));
-
             nextButton.click();
 
-            driver.findElement(By.id("username")).clear();
+            Thread.sleep(2000);
 
-            // WHY CAN'T I USE THIS AGAIN?
+            // Check if login failed, true if failed, false if success
+            boolean isLoginFailed = driver.getPageSource().contains("Invalid Username or Password");
+
+            // if success
+            if (!isLoginFailed){
+                driver.close();
+            }
+            else{
+                // WHY CAN'T I USE THIS AGAIN?
 //            username.clear();
 
-            // clear fields for next input
-            driver.findElement(By.id("username")).clear();
-            Thread.sleep(3000);
+                // clear fields for next input
+                driver.findElement(By.id("username")).clear();
+            }
 
 
         }
 
-        System.out.println("Logging in with the correct username and password");
 
-        // get the user name field of the account page
-        WebElement username = driver.findElement(By.id("username"));
+    }
 
-        // send my user name to fill up the box
-        username.sendKeys(myUserName);
 
-        // locate the "Next" button in the account page
-        WebElement password = driver.findElement(By.id("password"));
-        password.sendKeys(myPassword);
+    public static void main(String[] args) throws InterruptedException {
+        WebDriver driver = setWebDriver("webdriver.chrome.driver","D:/Downloads D Drive/chromedriver_win32/chromedriver.exe");
 
-        // login
+        // go to statcounter
+        driver.get("https://statcounter.com/login/");
 
-        WebElement nextButton = driver.findElement(By.className("submit"));
-        nextButton.click();
+        // correct username and password
+        String myUserName = "escistd50.003";
 
-        //explicitly wait until the password field is present in the page
-        // a better way as compared to FillMessageText
+        // correct password
+        String myPassword = "SUTD@Singapore";
 
-        try {
-            // wait for max 10 seconds for some conditions, and after that if condition not true, throw an exception
-            WebDriverWait wait = new WebDriverWait(driver, 10);
-            // wait only until expected condition :  project front page loads,
-            // you want the element to become clickable, this is blocking call
-            // wait until the expectation is satisfied
-            // if not, after 10s, throw exception then you catch the exception
-            // a better way as compared to thread.sleep() in FillMessageText
+        // array of usernames, last one is the correct one
+        String[] innovativeUsernames = {"escistd50.005", "escepd50.003", "profSud", "escistd50.003"};
 
-            // wait until the element with id becomes clickable. Unless the page is loaded, the element will not be
-            // clickable
-            wait.until(ExpectedConditions.elementToBeClickable(By.id("project-name-p12207705")));
-            // click project link
-            driver.findElement(By.id("project-name-p12207705")).click();
-            // catch here
-            // if the link is not clickable within 10 s, throw exception
-        } catch (Exception NoSuchElementException) {
-            System.out.println("login/password name invalid");
-        }
+        sendNameAndPassword(innovativeUsernames, myPassword, driver);
     }
 }
