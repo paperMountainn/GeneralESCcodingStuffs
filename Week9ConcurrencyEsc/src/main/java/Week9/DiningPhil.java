@@ -38,6 +38,7 @@ class Philosopher extends Thread {
                 Thread.sleep(randomGenerator.nextInt(100)); //not sleeping but thinking
                 System.out.println("Phil " + index + " finishes thinking.");
                 left.pickup();
+                Thread.sleep(randomGenerator.nextInt(100)); //each phil has their left fork, unwilling to let it go. This results in deadlock.
                 System.out.println("Phil " + index + " picks up left fork.");
                 right.pickup();
                 System.out.println("Phil " + index + " picks up right fork.");
