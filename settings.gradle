@@ -1,3 +1,5 @@
+include ':Week9ConcurrencyEsc'
+include ':Week11Synchronisation'
 include ':CodingStandardsWeek6Part2'
 include ':Advanced-Testing-W8'
 include ':SyncAndLocks-ESC-Cohort-Week10'
